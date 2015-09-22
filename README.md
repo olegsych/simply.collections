@@ -4,7 +4,7 @@ A small C++ library for implementing collections in APIs
 
 ## building
 
-[![Build status](https://ci.appveyor.com/api/projects/status/github/olegsych/simply.collections?branch=master&retina=true)](https://ci.appveyor.com/project/olegsych/simply.collections/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/github/olegsych/simply.collections?branch=master&retina=true)](https://ci.appveyor.com/project/olegsych/simply-collections/branch/master)
 
 From [Visual Studio 2015](https://www.visualstudio.com/downloads):
 - Open `simply.collections.sln`
