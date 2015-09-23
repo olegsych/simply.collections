@@ -35,6 +35,10 @@ deploy:
   api_key:
     secure: MllAarE5OQzLPrMNz2oSYIv2A197InquS37HPJ37FyFqrS7WQ1IroGaKol+LCBLG
   skip_symbols: true
+- provider: GitHub
+  auth_token:
+    secure: 2jrhsfBWvcjqAsyB5QdvDKXHdpnY0VjOej29DqzjrheWsTcToI3cn5ZOACfC17FP
+  artifact: /.*\.nupkg/
 
 nuget:
   project_feed: true
