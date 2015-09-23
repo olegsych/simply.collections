@@ -1,7 +1,10 @@
 # CI build definition for https://ci.appveyor.com/project/olegsych/simply-collections
 # To learn more, see http://www.appveyor.com/docs/appveyor-yml
 
-version: 0.1.0-build{build}
+version: 0.1.{build}
+
+pull_requests:
+  do_not_increment_build_number: true
 
 branches:
   only:
@@ -26,6 +29,12 @@ after_test:
 
 artifacts:
 - path: bin\debug\*.nupkg
+
+deploy:
+- provider: NuGet
+  api_key:
+    secure: MllAarE5OQzLPrMNz2oSYIv2A197InquS37HPJ37FyFqrS7WQ1IroGaKol+LCBLG
+  skip_symbols: true
 
 nuget:
   project_feed: true
