@@ -58,6 +58,7 @@ namespace simply
 			assert::is_same<tracker, actual::value_type>();
 			assert::is_same<tracker&, actual::reference>();
 			assert::is_same<input_iterator_tag, actual::iterator_category>();
+			assert::is_same<int, actual::difference_type>(); // for std::count and count::if
 		}
 
 		TEST_METHOD(iterator_supports_standard_equal_algorithm)

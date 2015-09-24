@@ -14,9 +14,9 @@ namespace simply
 		using value_type = element_t;
 		using reference = element_t&;
 		using iterator_category = std::input_iterator_tag;
+		using difference_type = int;
 
 		// Definitions not valid for this type but expected by iterator_traits<T>
-		using difference_type = void; 
 		using pointer = void;
 
 		iterator(std::shared_ptr<enumerable<element_t>> enumerable, iterator_position position)
