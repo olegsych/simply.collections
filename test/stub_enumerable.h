@@ -3,7 +3,7 @@
 #include <functional>
 #include <initializer_list>
 #include <memory>
-#include <simply/enumerable.h>
+#include <simply/collections/enumerable.h>
 #include "stub_enumerator.h"
 
 namespace simply 

@@ -2,8 +2,8 @@
 
 #include <memory>
 #include <stdexcept>
-#include <simply/enumerable.h>
-#include <simply/iterator.h>
+#include <simply/collections/enumerable.h>
+#include <simply/collections/iterator.h>
 
 namespace simply
 {

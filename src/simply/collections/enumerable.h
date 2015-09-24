@@ -1,7 +1,7 @@
 #pragma once
 
 #include <memory>
-#include <simply/enumerator.h>
+#include <simply/collections/enumerator.h>
 
 namespace simply
 {

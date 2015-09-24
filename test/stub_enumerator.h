@@ -2,7 +2,7 @@
 
 #include <functional>
 #include <initializer_list>
-#include <simply/enumerator.h>
+#include <simply/collections/enumerator.h>
 
 namespace simply
 {

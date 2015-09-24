@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include <algorithm>
 #include <memory>
-#include <simply/iterator.h>
+#include <simply/collections/iterator.h>
 #include "stub_enumerable.h"
 #include "stub_enumerator.h"
 

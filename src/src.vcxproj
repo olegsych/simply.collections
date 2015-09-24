@@ -19,11 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="simply\enumerable.h" />
-    <ClInclude Include="simply\enumerator.h" />
-    <ClInclude Include="simply\iterator.h" />
-    <ClInclude Include="simply\iterator_position.h" />
-    <ClInclude Include="simply\range.h" />
+    <ClInclude Include="simply\collections.h" />
+    <ClInclude Include="simply\collections\enumerable.h" />
+    <ClInclude Include="simply\collections\enumerator.h" />
+    <ClInclude Include="simply\collections\iterator.h" />
+    <ClInclude Include="simply\collections\iterator_position.h" />
+    <ClInclude Include="simply\collections\range.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="simply.collections.nuspec">

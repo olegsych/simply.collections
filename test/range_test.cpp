@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include <memory>
 #include <vector>
-#include <simply/range.h>
+#include <simply/collections/range.h>
 #include "stub_enumerable.h"
 #include "stub_enumerator.h"
 

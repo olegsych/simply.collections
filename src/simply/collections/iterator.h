@@ -3,8 +3,8 @@
 #include <iterator>
 #include <memory>
 #include <stdexcept>
-#include <simply/enumerable.h>
-#include <simply/iterator_position.h>
+#include <simply/collections/enumerable.h>
+#include <simply/collections/iterator_position.h>
 
 namespace simply
 {
