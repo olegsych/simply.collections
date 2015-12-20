@@ -1,7 +1,9 @@
-#include "stdafx.h"
 #include <algorithm>
+#include <CppUnitTest.h>
 #include <memory>
+#include <simply/assert.h>
 #include <simply/collections/iterator.h>
+#include <simply/random.h>
 #include "stub_enumerable.h"
 #include "stub_enumerator.h"
 
@@ -63,7 +65,7 @@ namespace simply
 
 		TEST_METHOD(iterator_supports_standard_equal_algorithm)
 		{
-			initializer_list<int> expected { 40, 41, 42 };
+			initializer_list<int> expected { random<int>(), random<int>(), random<int>() };
 			shared_ptr<enumerable<int>> enumerable { create_enumerable(expected) };
 			iterator<int> begin { enumerable, iterator_position::before_first };
 			iterator<int> end { enumerable, iterator_position::after_last };
@@ -98,15 +100,15 @@ namespace simply
 
 		TEST_METHOD(copy_constructor_copies_enumerable_from_source)
 		{
-			iterator<int> source { create_enumerable<int>({ 42 }), iterator_position::before_first };
+			iterator<int> source { create_enumerable<int>({ random<int>() }), iterator_position::before_first };
 			iterator<int> sut { source };
 			assert::is_equal(*source, *sut);
 		}
 
 		TEST_METHOD(copy_constructor_copies_current_element_from_source)
 		{
-			const int expected = 42;
-			iterator<int> source { create_enumerable<int>({ expected - 1, expected }), iterator_position::before_first };
+            const int expected { random<int>() };
+			iterator<int> source { create_enumerable<int>({ random<int>(), expected }), iterator_position::before_first };
 			++source;
 			iterator<int> sut { source };
 			assert::is_equal(expected, *sut);
@@ -114,8 +116,8 @@ namespace simply
 
 		TEST_METHOD(copy_constructor_copies_enumerator_from_source)
 		{
-			const int expected = 42;
-			iterator<int> source { create_enumerable<int>({ expected - 1, expected }), iterator_position::before_first };
+            const int expected { random<int>() };
+			iterator<int> source { create_enumerable<int>({ random<int>(), expected }), iterator_position::before_first };
 			*source;
 			iterator<int> sut { source };
 			++sut;
@@ -151,7 +153,7 @@ namespace simply
 
 		TEST_METHOD(copy_assignment_operator_copies_enumerable_from_source)
 		{
-			const int expected { 42 };
+			const int expected { random<int>() };
 			iterator<int> source { create_enumerable<int>({ expected }), iterator_position::before_first };
 			iterator<int> target { create_enumerable<int>({}), iterator_position::before_first };;
 			target = source;
@@ -160,8 +162,8 @@ namespace simply
 
 		TEST_METHOD(copy_assignment_operator_copies_current_element_from_source)
 		{
-			const int expected { 42 };
-			iterator<int> source { create_enumerable<int>({ expected -1, expected }), iterator_position::before_first };
+			const int expected { random<int>() };
+			iterator<int> source { create_enumerable<int>({ random<int>(), expected }), iterator_position::before_first };
 			++source;
 			iterator<int> target { create_enumerable<int>({}), iterator_position::before_first };
 			target = source;
@@ -170,8 +172,8 @@ namespace simply
 
 		TEST_METHOD(copy_assignment_operator_copies_enumerator_from_source)
 		{
-			const int expected { 42 };
-			iterator<int> source { create_enumerable<int>({ expected - 1, expected }), iterator_position::before_first };
+			const int expected { random<int>() };
+			iterator<int> source { create_enumerable<int>({ random<int>(), expected }), iterator_position::before_first };
 			*source;
 			iterator<int> target { create_enumerable<int>({}), iterator_position::before_first };
 			target = source;
@@ -235,7 +237,7 @@ namespace simply
 
 		TEST_METHOD(dereferencing_operator_throws_logic_error_when_invoked_after_last_element)
 		{
-			iterator<int> sut { create_enumerable<int>({ 42 }), iterator_position::before_first };
+			iterator<int> sut { create_enumerable<int>({ random<int>() }), iterator_position::before_first };
 			++sut;
 			auto e = assert::throws<logic_error>([&] { *sut; });
 			assert::find("iterator cannot be dereferenced when it points after last enumerable element", e->what());
@@ -243,15 +245,17 @@ namespace simply
 
 		TEST_METHOD(dereferencing_operator_creates_enumerator_and_gets_next_value_when_called_first_time)
 		{
-			iterator<int> sut { create_enumerable<int>({ 42 }), iterator_position::before_first };
-			assert::is_equal(42, *sut);
+            const int expected { random<int>() };
+			iterator<int> sut { create_enumerable<int>({ expected }), iterator_position::before_first };
+			assert::is_equal(expected, *sut);
 		}
 
 		TEST_METHOD(dereferencing_operator_returns_same_value_when_called_second_time)
 		{
-			iterator<int> sut { create_enumerable<int>({ 42 }), iterator_position::before_first };
+            const int expected { random<int>() };
+			iterator<int> sut { create_enumerable<int>({ expected }), iterator_position::before_first };
 			*sut;
-			assert::is_equal(42, *sut);
+			assert::is_equal(expected, *sut);
 		}
 
 		#pragma endregion
@@ -267,7 +271,7 @@ namespace simply
 
 		TEST_METHOD(increment_operator_returns_reference_to_itself)
 		{
-			iterator<int> expected { create_enumerable<int>({ 42 }), iterator_position::before_first };
+			iterator<int> expected { create_enumerable<int>({ random<int>() }), iterator_position::before_first };
 			iterator<int>& actual = ++expected;
 			assert::is_equal(&expected, &actual);
 		}
@@ -288,7 +292,7 @@ namespace simply
 
 		TEST_METHOD(increment_operator_throws_logic_error_when_invoked_after_last_element)
 		{
-			iterator<int> sut { create_enumerable<int>({ 42 }), iterator_position::before_first };
+			iterator<int> sut { create_enumerable<int>({ random<int>() }), iterator_position::before_first };
 			++sut;
 			auto e = assert::throws<logic_error>([&] { ++sut; });
 			assert::find("iterator cannot be incremented when it points after last enumerable element", e->what());
@@ -296,25 +300,28 @@ namespace simply
 
 		TEST_METHOD(increment_operator_gets_first_element_before_getting_next)
 		{
-			iterator<int> sut { create_enumerable<int>({ 41, 42 }), iterator_position::before_first };
+            const int expected { random<int>() };
+			iterator<int> sut { create_enumerable<int>({ random<int>(), expected }), iterator_position::before_first };
 			++sut;
-			assert::is_equal(42, *sut);
+			assert::is_equal(expected, *sut);
 		}
 
 		TEST_METHOD(increment_operator_doesnt_get_first_element_after_previous_dereferencing)
 		{
-			iterator<int> sut { create_enumerable<int>({ 41, 42 }), iterator_position::before_first };
+            const int expected { random<int>() };
+			iterator<int> sut { create_enumerable<int>({ random<int>(), expected }), iterator_position::before_first };
 			*sut;
 			++sut;
-			assert::is_equal(42, *sut);
+			assert::is_equal(expected, *sut);
 		}
 
 		TEST_METHOD(increment_operator_doesnt_get_first_element_after_previous_increment)
 		{
-			iterator<int> sut { create_enumerable<int>({ 40, 41, 42 }), iterator_position::before_first };
+            const int expected { random<int>() };
+			iterator<int> sut { create_enumerable<int>({ random<int>(), random<int>(), expected }), iterator_position::before_first };
 			++sut;
 			++sut;
-			assert::is_equal(42, *sut);
+			assert::is_equal(expected, *sut);
 		}
 
 		TEST_METHOD(increment_operator_destroys_previouly_created_current_element)
@@ -327,29 +334,29 @@ namespace simply
 
 		TEST_METHOD(increment_operator_throws_logic_error_when_iterator_was_constructor_copied_from_previously_incremented_iterator_to_avoid_calling_get_next_of_enumerator_after_last_element)
 		{
-			iterator<int> source { create_enumerable({ 40, 41, 42 }), iterator_position::before_first };
-			++source; // enumerator.get_next(41)
+			iterator<int> source { create_enumerable({ random<int>(), random<int>(), random<int>() }), iterator_position::before_first };
+			++source; // enumerator.get_next(second)
 			iterator<int> sut { source }; // both sut and source now share the same enumerator
-			auto e = assert::throws<logic_error>([&] { ++sut; }); // attempt to enumerator.get_next(42)
+			auto e = assert::throws<logic_error>([&] { ++sut; }); // attempt to enumerator.get_next(third)
 			assert::find("Incrementing iterator copied from previously incremented iterator is not supported.", e->what());
 		}
 
 		TEST_METHOD(increment_operator_throws_logic_error_when_iterator_was_assignment_copied_from_previously_incremented_iterator_to_avoid_calling_get_next_of_enumerator_after_last_element)
 		{
-			iterator<int> source { create_enumerable({ 40, 41, 42 }), iterator_position::before_first };
-			++source; // enumerator.get_next(41)
+			iterator<int> source { create_enumerable({ random<int>(), random<int>(), random<int>() }), iterator_position::before_first };
+			++source; // enumerator.get_next(second)
 			iterator<int> sut { create_enumerable<int>(), iterator_position::before_first };
 			sut = source; // both sut and source now share the same enumerator
-			auto e = assert::throws<logic_error>([&] { ++sut; }); // attempt to enumerator.get_next(42)
+			auto e = assert::throws<logic_error>([&] { ++sut; }); // attempt to enumerator.get_next(third)
 			assert::find("Incrementing iterator copied from previously incremented iterator is not supported.", e->what());
 		}
 
 		TEST_METHOD(increment_operator_throws_logic_error_when_constructor_copy_was_already_incremented_to_avoid_calling_get_next_of_enumerator_after_last_element)
 		{
-			iterator<int> sut { create_enumerable({ 41, 42 }), iterator_position::before_first };
-			iterator<int> target { sut }; // both sut and source now share the same enumerator
-			++target; // enumerator.get_next(42)
-			auto e = assert::throws<logic_error>([&] { ++sut; }); // attempt to enumerator.get_next(41)
+			iterator<int> sut { create_enumerable({ random<int>(), random<int>() }), iterator_position::before_first };
+			iterator<int> target { sut }; // both sut and target now share the same enumerator
+			++target; // enumerator.get_next(second)
+			auto e = assert::throws<logic_error>([&] { ++sut; }); // attempt to enumerator.get_next(first)
 			assert::find("Incrementing iterator copied from previously incremented iterator is not supported.", e->what());
 		}
 
@@ -359,7 +366,7 @@ namespace simply
 
 		TEST_METHOD(iterators_are_equal_when_they_are_both_before_first_element_of_same_enumerable)
 		{
-			auto enumerable = create_enumerable<int>({ 42 });
+			auto enumerable = create_enumerable<int>({ random<int>() });
 			iterator<int> x { enumerable, iterator_position::before_first };
 			iterator<int> y { enumerable, iterator_position::before_first };
 			assert::is_true(x == y);
@@ -368,7 +375,7 @@ namespace simply
 
 		TEST_METHOD(iterators_are_equal_when_they_are_both_after_last_element_of_same_enumerable)
 		{
-			auto enumerable = create_enumerable<int>({ 42 });
+			auto enumerable = create_enumerable<int>({ random<int>() });
 			iterator<int> x { enumerable, iterator_position::after_last };
 			iterator<int> y { enumerable, iterator_position::after_last };
 			assert::is_true(x == y);
@@ -377,15 +384,15 @@ namespace simply
 
 		TEST_METHOD(iterators_are_not_equal_when_they_point_to_different_enumerables_in_same_position)
 		{
-			iterator<int> x { create_enumerable<int>({ 42 }), iterator_position::before_first };
-			iterator<int> y { create_enumerable<int>({ 42 }), iterator_position::before_first };
+			iterator<int> x { create_enumerable<int>({ random<int>() }), iterator_position::before_first };
+			iterator<int> y { create_enumerable<int>({ random<int>() }), iterator_position::before_first };
 			assert::is_false(x == y);
 			assert::is_true(x != y);
 		}
 
 		TEST_METHOD(iterators_are_not_equal_when_they_point_to_different_position_in_same_enumerables)
 		{
-			auto enumerable = create_enumerable<int>({ 42 });
+			auto enumerable = create_enumerable<int>({ random<int>() });
 			iterator<int> x { enumerable, iterator_position::before_first };
 			iterator<int> y { enumerable, iterator_position::after_last };
 			assert::is_false(x == y);
@@ -394,7 +401,7 @@ namespace simply
 
 		TEST_METHOD(iterators_are_not_equal_when_they_point_in_range_of_same_enumerable_because_exact_position_is_undefined)
 		{
-			auto enumerable = create_enumerable<int>({ 41, 42 });
+			auto enumerable = create_enumerable<int>({ random<int>(), random<int>() });
 			iterator<int> x { enumerable, iterator_position::before_first };
 			iterator<int> y { enumerable, iterator_position::before_first };
 			++x;
