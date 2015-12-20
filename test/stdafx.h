@@ -11,4 +11,5 @@
 #include <iterator>
 #include <memory>
 #include <simply/assert.h>
+#include <simply/random.h>
 #include <stdexcept>

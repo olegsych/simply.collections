@@ -175,14 +175,16 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <Import Project="..\src\simply.collections.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="..\packages\simply.assert.0.1.0-build45\build\native\simply.assert.targets" Condition="Exists('..\packages\simply.assert.0.1.0-build45\build\native\simply.assert.targets')" />
-    <Import Project="..\packages\simply.utility.0.1.0-build45\build\native\simply.utility.targets" Condition="Exists('..\packages\simply.utility.0.1.0-build45\build\native\simply.utility.targets')" />
+    <Import Project="..\packages\simply.random.0.1.2\build\native\simply.random.targets" Condition="Exists('..\packages\simply.random.0.1.2\build\native\simply.random.targets')" />
+    <Import Project="..\packages\simply.assert.0.1.47\build\native\simply.assert.targets" Condition="Exists('..\packages\simply.assert.0.1.47\build\native\simply.assert.targets')" />
+    <Import Project="..\packages\simply.utility.0.1.46\build\native\simply.utility.targets" Condition="Exists('..\packages\simply.utility.0.1.46\build\native\simply.utility.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\simply.assert.0.1.0-build45\build\native\simply.assert.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\simply.assert.0.1.0-build45\build\native\simply.assert.targets'))" />
-    <Error Condition="!Exists('..\packages\simply.utility.0.1.0-build45\build\native\simply.utility.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\simply.utility.0.1.0-build45\build\native\simply.utility.targets'))" />
+    <Error Condition="!Exists('..\packages\simply.random.0.1.2\build\native\simply.random.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\simply.random.0.1.2\build\native\simply.random.targets'))" />
+    <Error Condition="!Exists('..\packages\simply.assert.0.1.47\build\native\simply.assert.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\simply.assert.0.1.47\build\native\simply.assert.targets'))" />
+    <Error Condition="!Exists('..\packages\simply.utility.0.1.46\build\native\simply.utility.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\simply.utility.0.1.46\build\native\simply.utility.targets'))" />
   </Target>
 </Project>

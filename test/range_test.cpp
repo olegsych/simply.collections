@@ -27,14 +27,15 @@ namespace simply
 
         TEST_METHOD(begin_returns_iterator_pointing_before_first_element_of_enumerable)
         {
-			range<int> sut { create_enumerable({ 42 }) };
+            const int expected { random<int>() };
+			range<int> sut { create_enumerable({ expected }) };
 			iterator<int> result { sut.begin() };
-			assert::is_equal(42, *result);
+			assert::is_equal(expected, *result);
         }
 
         TEST_METHOD(end_returns_iterator_pointing_after_last_element_of_enumerable)
         {
-			shared_ptr<enumerable<int>> enumerable { create_enumerable({ 42 }) };
+			shared_ptr<enumerable<int>> enumerable { create_enumerable({ random<int>() }) };
 			range<int> sut { enumerable };
 			iterator<int> result { sut.end() };
 			iterator<int> expected { enumerable, iterator_position::after_last };
@@ -43,7 +44,7 @@ namespace simply
 
         TEST_METHOD(range_can_be_used_in_for_loop)
         {
-			initializer_list<int> expected { 40, 41, 42 };
+			initializer_list<int> expected { random<int>(), random<int>(), random<int>() };
 			vector<int> actual;
 			range<int> sut { create_enumerable(expected) };
 			for (int value : sut)
