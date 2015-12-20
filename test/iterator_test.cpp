@@ -1,5 +1,5 @@
-#include "stdafx.h"
 #include <algorithm>
+#include <CppUnitTest.h>
 #include <memory>
 #include <simply/assert.h>
 #include <simply/collections/iterator.h>

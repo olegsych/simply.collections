@@ -1,7 +1,9 @@
-#include "stdafx.h"
+#include <CppUnitTest.h>
 #include <memory>
 #include <vector>
+#include <simply/assert.h>
 #include <simply/collections/range.h>
+#include <simply/random.h>
 #include "stub_enumerable.h"
 #include "stub_enumerator.h"
 
