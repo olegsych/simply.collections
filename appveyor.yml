@@ -21,14 +21,14 @@ build_script:
 - msbuild simply.collections.sln /m /p:Platform=x64 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
 test_script:
-- vstest.console bin\debug\Win32\test.dll /Platform:x86 /logger:Appveyor
-- vstest.console bin\debug\x64\test.dll /Platform:x64 /logger:Appveyor /inIsolation
+- vstest.console bin\Win32\test.dll /Platform:x86 /logger:Appveyor
+- vstest.console bin\x64\test.dll /Platform:x64 /logger:Appveyor /inIsolation
 
 after_test:
-- nuget pack "src\simply.collections.nuspec" -BasePath "src" -OutputDirectory "bin\debug" -Properties "version=%appveyor_build_version%"
+- nuget pack "src\simply.collections.nuspec" -BasePath "src" -OutputDirectory "bin" -Properties "version=%appveyor_build_version%"
 
 artifacts:
-- path: bin\debug\*.nupkg
+- path: bin\*.nupkg
 
 deploy:
 - provider: NuGet
@@ -42,4 +42,4 @@ deploy:
 
 nuget:
   project_feed: true
-  disable_publish_on_pr: true
+  account_feed: true
