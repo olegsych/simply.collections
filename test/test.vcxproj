@@ -47,6 +47,7 @@
   <ItemGroup>
     <ClCompile Include="iterator_test.cpp" />
     <ClCompile Include="range_test.cpp" />
+    <ClCompile Include="scenario_test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
