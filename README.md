@@ -77,7 +77,7 @@ public:
 };
 ```
 
-You can use `range` with the C++ `for each` loop, the STL algorithms or any other code expecting C++ iterators.
+You can use `range` with the C++ 11 `for` loop, the STL algorithms or any other code expecting C++ iterators.
 ``` C++
 #include <iostream>
 #include <algorithm>
@@ -85,7 +85,7 @@ You can use `range` with the C++ `for each` loop, the STL algorithms or any othe
 question q;
 range<int> answers { q.answers() };
 
-for each(int answer in answers)
+for (int answer : answers)
     std::cout << answer;
 
 std::for_each(std::begin(answers), std::end(answers), [](int answer) {

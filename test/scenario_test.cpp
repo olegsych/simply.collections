@@ -55,7 +55,7 @@ public:
     {
         question q;
         range<int> answers { q.answers() };
-        for each(int answer in answers)
+        for (int answer : answers)
         {
             std::cout << answer;
         }
