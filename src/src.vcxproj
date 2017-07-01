@@ -26,7 +26,7 @@
     <ProjectGuid>{F99792FC-9EE5-4540-8D22-84AB92910790}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>src</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
