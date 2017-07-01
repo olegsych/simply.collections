@@ -41,13 +41,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="stub_enumerable.h" />
-    <ClInclude Include="stub_enumerator.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="iterator_test.cpp" />
-    <ClCompile Include="range_test.cpp" />
-    <ClCompile Include="scenario_test.cpp" />
+    <ClInclude Include="*.h" />
+    <ClCompile Include="*.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
