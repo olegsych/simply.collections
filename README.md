@@ -93,6 +93,14 @@ std::for_each(std::begin(answers), std::end(answers), [](int answer) {
 });
 ```
 
+## clone
+
+This repository contains [submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules).
+
+```
+git clone --recursive https://github.com/olegsych/simply.collections.git
+```
+
 ## build
 
 [![Build status](https://ci.appveyor.com/api/projects/status/github/olegsych/simply.collections?branch=master)](https://ci.appveyor.com/project/olegsych/simply-collections/branch/master)
